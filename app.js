@@ -36,5 +36,6 @@ const db = mongoose.connection;
 db.on('error', err => console.log(err));
 db.once('open', () => {
   require('./routes/customers')(app);
+  require('./routes/users')(app);
   console.log(`Server Live on port ${Config.PORT}`);
 });
