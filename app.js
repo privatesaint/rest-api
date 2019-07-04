@@ -16,7 +16,7 @@ const app = express();
  * Adding body parsers specifically to the routes that need them
  */
 // create application/json parser
-const jsonParser = bodyParser.json()
+const jsonParser = bodyParser.json();
 
 // create application/x-www-form-urlencoded parser
 const urlencodedParser = bodyParser.urlencoded({
@@ -29,8 +29,9 @@ app.listen(8000, () => {
     })
 });
 
-const db = mongoose.connection
-db.on('error', (err) => console.log(err))
+const db = mongoose.connection;
+db.on('error', (err) => console.log(err));
 db.once('open', () => {
-
+    require("./routes/customers")(app);
+    console.log(`Server Live on port ${Config.PORT}`)
 })
