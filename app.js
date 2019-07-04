@@ -1,7 +1,7 @@
 const express = require('express');
 // const bodyParser = require("body-parser");
-const mongoose = require("mongoose");
-const Config = require("./config");
+const mongoose = require('mongoose');
+const Config = require('./config');
 
 const app = express();
 
@@ -26,14 +26,15 @@ const app = express();
 // })
 
 app.listen(Config.PORT, () => {
-    mongoose.connect(Config.MONGODB_URL, {
-        useNewUrlParser: true
-    })
+  mongoose.set('useFindAndModify', false);
+  mongoose.connect(Config.MONGODB_URL, {
+    useNewUrlParser: true
+  });
 });
 
 const db = mongoose.connection;
-db.on('error', (err) => console.log(err));
+db.on('error', err => console.log(err));
 db.once('open', () => {
-    require("./routes/customers")(app);
-    console.log(`Server Live on port ${Config.PORT}`)
-})
+  require('./routes/customers')(app);
+  console.log(`Server Live on port ${Config.PORT}`);
+});
