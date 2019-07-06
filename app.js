@@ -2,6 +2,7 @@ const express = require('express');
 // const bodyParser = require("body-parser");
 const mongoose = require('mongoose');
 const Config = require('./config');
+const rjwt = require('restify-jwt-community');
 
 const app = express();
 
@@ -24,6 +25,9 @@ const app = express();
 // const urlencodedParser = bodyParser.urlencoded({
 //     extended: false
 // })
+
+// Protect Route
+// app.use(rjwt({ secret: Config.JWT_SECRET }).unless({ path: ['/auth'] }));
 
 app.listen(Config.PORT, () => {
   mongoose.set('useFindAndModify', false);
